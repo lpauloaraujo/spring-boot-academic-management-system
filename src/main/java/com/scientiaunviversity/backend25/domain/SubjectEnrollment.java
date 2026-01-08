@@ -16,6 +16,9 @@ public class SubjectEnrollment {
     @EmbeddedId
     private EnrollmentId id;
 
+    @Column(name = "enrollment_code", unique = true, nullable = false)
+    private String enrollmentCode;
+
     @OneToOne
     @MapsId("studentId")
     @JoinColumn(name = "user_id")

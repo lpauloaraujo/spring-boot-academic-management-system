@@ -15,7 +15,7 @@ public class Student extends User {
     @Column(name = "registration_number", nullable = false, unique = true)
     private String registrationNumber;
 
-    @Column(name = "course_enrollment")
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
     private CourseEnrollment curseEnrollment;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)

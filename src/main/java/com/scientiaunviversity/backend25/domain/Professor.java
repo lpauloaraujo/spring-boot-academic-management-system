@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.domain;
 
 import com.scientiaunviversity.backend25.domain.enums.AcademicDegree;
+import com.scientiaunviversity.backend25.domain.enums.Department;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class Professor extends User {
     private AcademicDegree academicDegree;
 
     @Enumerated(EnumType.STRING)
-    private String department;
+    private Department department;
 
     @OneToMany(mappedBy = "professor")
     private Set<Subject> subjects = new HashSet<>();

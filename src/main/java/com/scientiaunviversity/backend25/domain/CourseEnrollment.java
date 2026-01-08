@@ -12,6 +12,9 @@ public class CourseEnrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "enrollment_code", unique = true, nullable = false)
+    private String enrollmentCode;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private Student student;
