@@ -26,10 +26,8 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found")));
     }
 
-    public User create (User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new IllegalArgumentException("Email already in use");
-        }
+    public <T extends User> T create(T user) {
         return userRepository.save(user);
     }
+
 }

@@ -1,10 +1,12 @@
 package com.scientiaunviversity.backend25.controllers;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.scientiaunviversity.backend25.domain.Professor;
+import com.scientiaunviversity.backend25.domain.Student;
 import com.scientiaunviversity.backend25.domain.User;
 import com.scientiaunviversity.backend25.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +24,13 @@ public class UserController {
     public List<User> getAll() {
         return userService.getAll();
     }
+
+    @PostMapping("/students")
+    public Student create(@RequestBody Student student) {
+        return userService.create(student);
+    }
+
+    @PostMapping("/professors")
+    public Professor create(@RequestBody Professor professor) {return userService.create(professor);}
 
 }
