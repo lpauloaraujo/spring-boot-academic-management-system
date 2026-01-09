@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("CourseEnrollments")
+@RequestMapping("course_enrollments")
 public class CourseEnrollmentController {
 
     private final CourseEnrollmentService courseEnrollmentService;
@@ -19,7 +19,7 @@ public class CourseEnrollmentController {
     @GetMapping
     public List<CourseEnrollment> getAll() {return courseEnrollmentService.getAll();}
 
-    @GetMapping("/{id^}")
+    @GetMapping("/{id}")
     public CourseEnrollment getById(@PathVariable Long id) {return courseEnrollmentService.getById(id);}
 
     @PostMapping

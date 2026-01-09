@@ -1,8 +1,7 @@
 package com.scientiaunviversity.backend25.services;
 
-import com.scientiaunviversity.backend25.domain.CourseEnrollment;
+import com.scientiaunviversity.backend25.domain.EnrollmentId;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
-import com.scientiaunviversity.backend25.repositories.CourseEnrollmentRepository;
 import com.scientiaunviversity.backend25.repositories.SubjectEnrollmentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,14 @@ public class SubjectEnrollmentService {
     }
 
     public List<SubjectEnrollment> getAll() {return subjectEnrollmentRepository.findAll();}
+
+    public SubjectEnrollment getById(Long studentId, Long classGroupId) {
+        EnrollmentId enrollmentId = new EnrollmentId();
+        enrollmentId.setStudentId(studentId);
+        enrollmentId.setClassGroupId(classGroupId);
+        return subjectEnrollmentRepository.findById(enrollmentId)
+                .orElseThrow(() -> new EntityNotFoundException("Subject enrollment not found."));
+    }
 
     public SubjectEnrollment create(SubjectEnrollment subjectEnrollment) {
         return subjectEnrollmentRepository.save(subjectEnrollment);

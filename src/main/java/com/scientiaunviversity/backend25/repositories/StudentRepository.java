@@ -1,8 +1,8 @@
 package com.scientiaunviversity.backend25.repositories;
 
-import com.scientiaunviversity.backend25.domain.User;
+import com.scientiaunviversity.backend25.domain.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
     boolean existsByEmail(String email);
 }

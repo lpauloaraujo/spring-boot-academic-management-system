@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,8 +17,8 @@ public class Student extends User {
     private String registrationNumber;
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
-    private CourseEnrollment curseEnrollment;
+    private CourseEnrollment courseEnrollment;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SubjectEnrollment> subjectEnrollments;
+    private Set<SubjectEnrollment> subjectEnrollments = new HashSet<>();
 }
