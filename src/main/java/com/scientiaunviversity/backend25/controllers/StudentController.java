@@ -1,11 +1,12 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.domain.Professor;
+import com.scientiaunviversity.backend25.DTOs.StudentResponseDTO;
 import com.scientiaunviversity.backend25.domain.Student;
-import com.scientiaunviversity.backend25.domain.User;
+import com.scientiaunviversity.backend25.mappers.StudentMapper;
 import com.scientiaunviversity.backend25.services.StudentService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,19 +14,35 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final StudentMapper studentMapper;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, StudentMapper studentMapper) {
         this.studentService = studentService;
+        this.studentMapper = studentMapper;
     }
 
     @GetMapping
-    public List<Student> getAll() {
-        return studentService.getAll();
+    public List<StudentResponseDTO> getAll() {
+        List<Student> studentList = studentService.getAll();
+        List<StudentResponseDTO> studentResponseDTOSList = new ArrayList<>();
+        for (Student student : studentList) {
+            studentResponseDTOSList.add(studentMapper.toResponse(student));
+        } return studentResponseDTOSList;
+    }
+
+    @GetMapping("/{id}")
+    public StudentResponseDTO getById(@PathVariable Long id) {
+        return studentMapper.toResponse(studentService.getById(id));
     }
 
     @PostMapping
-    public Student create(@RequestBody Student student) {
-        return studentService.create(student);
+    public StudentResponseDTO create(@RequestBody Student student) {
+        return studentMapper.toResponse(studentService.create(student));
+    }
+
+    @DeleteMapping("/{id}")
+    public StudentResponseDTO delete(@PathVariable Long id) {
+        return studentMapper.toResponse(studentService.delete(id));
     }
 
 }

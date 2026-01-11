@@ -8,5 +8,5 @@ public record StudentResponseDTO(
         String email,
         String registrationNumber,
         String courseName,
-        List<String> enrolledSubjects
+        List<String> enrolledSubjectsNames
 ) {}

@@ -1,8 +1,9 @@
 package com.scientiaunviversity.backend25.mappers;
 
-import com.scientiaunviversity.backend25.DTOs.ProfessorResponseDTO;
-import com.scientiaunviversity.backend25.domain.Professor;
+import com.scientiaunviversity.backend25.DTOs.StudentResponseDTO;
+import com.scientiaunviversity.backend25.domain.Student;
 import com.scientiaunviversity.backend25.domain.Subject;
+import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,21 +12,21 @@ import java.util.List;
 @Component
 public class StudentMapper {
 
-    public ProfessorResponseDTO toResponse(Professor professor) {
+    public StudentResponseDTO toResponse(Student student) {
 
-        List<String> subjectsNames = new ArrayList<>();
-        for (Subject subject : professor.getSubjects()) {
-            subjectsNames.add(subject.getName());
-        }
+        List<String> enrolledSubjectsNames = new ArrayList<>();
+        for (SubjectEnrollment subjectEnrollment : student.getSubjectEnrollments()) {
+            String subjectName = subjectEnrollment.getClassGroup().getSubject().getName();
+            enrolledSubjectsNames.add(subjectName);
+            }
 
-        return new ProfessorResponseDTO(
-                professor.getUserId(),
-                professor.getFullName(),
-                professor.getEmail(),
-                professor.getRegistrationNumber(),
-                professor.getAcademicDegree(),
-                professor.getDepartment(),
-                subjectsNames
+        return new StudentResponseDTO(
+                student.getUserId(),
+                student.getFullName(),
+                student.getEmail(),
+                student.getRegistrationNumber(),
+                student.getCourseEnrollment().getCourse().getName(),
+                enrolledSubjectsNames
         );
     }
 }

@@ -1,6 +1,5 @@
 package com.scientiaunviversity.backend25.services;
 
-import com.scientiaunviversity.backend25.domain.ClassGroup;
 import com.scientiaunviversity.backend25.domain.Student;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
 import com.scientiaunviversity.backend25.repositories.StudentRepository;
@@ -9,7 +8,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -45,4 +43,10 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    @Transactional
+    public Student delete(Long id) {
+        Student studentToDelete = getById(id);
+        studentRepository.delete(studentToDelete);
+        return studentToDelete;
+    }
 }

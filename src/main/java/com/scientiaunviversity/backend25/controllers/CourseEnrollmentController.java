@@ -1,9 +1,12 @@
 package com.scientiaunviversity.backend25.controllers;
 
+import com.scientiaunviversity.backend25.DTOs.CourseEnrollmentResponseDTO;
 import com.scientiaunviversity.backend25.domain.CourseEnrollment;
+import com.scientiaunviversity.backend25.mappers.CourseEnrollmentMapper;
 import com.scientiaunviversity.backend25.services.CourseEnrollmentService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -11,23 +14,37 @@ import java.util.List;
 public class CourseEnrollmentController {
 
     private final CourseEnrollmentService courseEnrollmentService;
+    private final CourseEnrollmentMapper courseEnrollmentMapper;
 
-    public CourseEnrollmentController(CourseEnrollmentService courseEnrollmentService) {
+    public CourseEnrollmentController(
+            CourseEnrollmentService courseEnrollmentService,
+            CourseEnrollmentMapper courseEnrollmentMapper) {
         this.courseEnrollmentService = courseEnrollmentService;
+        this.courseEnrollmentMapper = courseEnrollmentMapper;
     }
 
     @GetMapping
-    public List<CourseEnrollment> getAll() {return courseEnrollmentService.getAll();}
+    public List<CourseEnrollmentResponseDTO> getAll() {
+         List<CourseEnrollment> courseEnrollmentList = courseEnrollmentService.getAll();
+         List<CourseEnrollmentResponseDTO> courseEnrollmentResponseDTOList = new ArrayList<>();
+         for (CourseEnrollment courseEnrollment : courseEnrollmentList) {
+             courseEnrollmentResponseDTOList.add(courseEnrollmentMapper.toResponse(courseEnrollment));
+         } return courseEnrollmentResponseDTOList;
+    }
 
     @GetMapping("/{id}")
-    public CourseEnrollment getById(@PathVariable Long id) {return courseEnrollmentService.getById(id);}
+    public CourseEnrollmentResponseDTO getById(@PathVariable Long id) {
+        return courseEnrollmentMapper.toResponse(courseEnrollmentService.getById(id));
+    }
 
     @PostMapping
-    public CourseEnrollment create(@RequestBody CourseEnrollment courseEnrollment) {
-        return courseEnrollmentService.create(courseEnrollment);
+    public CourseEnrollmentResponseDTO create(@RequestBody CourseEnrollment courseEnrollment) {
+        return courseEnrollmentMapper.toResponse(courseEnrollmentService.create(courseEnrollment));
     }
 
     @DeleteMapping("/{id}")
-    public CourseEnrollment delete(@PathVariable Long id) {return courseEnrollmentService.delete(id);}
+    public CourseEnrollmentResponseDTO delete(@PathVariable Long id) {
+        return courseEnrollmentMapper.toResponse(courseEnrollmentService.delete(id));
+    }
 
 }

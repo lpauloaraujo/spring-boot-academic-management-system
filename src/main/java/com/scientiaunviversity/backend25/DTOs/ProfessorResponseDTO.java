@@ -12,5 +12,5 @@ public record ProfessorResponseDTO (
         String registrationNumber,
         AcademicDegree academicDegree,
         Department department,
-        List<String> subjects
+        List<String> subjectNames
 ) { }
