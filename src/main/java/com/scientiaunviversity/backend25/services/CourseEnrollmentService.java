@@ -3,6 +3,7 @@ package com.scientiaunviversity.backend25.services;
 import com.scientiaunviversity.backend25.domain.CourseEnrollment;
 import com.scientiaunviversity.backend25.repositories.CourseEnrollmentRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,5 +24,12 @@ public class CourseEnrollmentService {
 
     public CourseEnrollment create(CourseEnrollment courseEnrollment) {
         return courseEnrollmentRepository.save(courseEnrollment);
+    }
+
+    @Transactional
+    public CourseEnrollment delete(Long id) {
+        CourseEnrollment courseEnrollmentToDelete = getById(id);
+        courseEnrollmentRepository.delete(courseEnrollmentToDelete);
+        return courseEnrollmentToDelete;
     }
 }

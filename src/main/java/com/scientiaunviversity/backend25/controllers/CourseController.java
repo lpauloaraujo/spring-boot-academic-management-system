@@ -26,4 +26,7 @@ public class CourseController {
     @PostMapping
     public Course create(@RequestBody Course course) {return courseService.create(course);}
 
+    @DeleteMapping("/{id}")
+    public Course delete(@PathVariable Long id) {return courseService.delete(id);}
+
 }

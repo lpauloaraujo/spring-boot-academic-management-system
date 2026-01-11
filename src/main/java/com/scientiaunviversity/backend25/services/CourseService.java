@@ -3,6 +3,7 @@ package com.scientiaunviversity.backend25.services;
 import com.scientiaunviversity.backend25.domain.Course;
 import com.scientiaunviversity.backend25.repositories.CourseRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,4 +24,11 @@ public class CourseService {
             .orElseThrow(() -> new EntityNotFoundException("Course not found"));}
 
     public Course create(Course course) {return courseRepository.save(course);}
+
+    @Transactional
+    public Course delete(Long id) {
+        Course courseToDelete = getById(id);
+        courseRepository.delete(courseToDelete);
+        return courseToDelete;
+    }
 }

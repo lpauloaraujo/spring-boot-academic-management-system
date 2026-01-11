@@ -29,4 +29,7 @@ public class SubjectController {
     public Subject create(@RequestBody Subject subject) {
         return subjectService.create(subject);
     }
+
+    @DeleteMapping("/{id}")
+    public Subject delete(@PathVariable Long id) {return subjectService.delete(id);}
 }

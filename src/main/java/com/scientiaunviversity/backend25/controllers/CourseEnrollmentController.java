@@ -26,4 +26,8 @@ public class CourseEnrollmentController {
     public CourseEnrollment create(@RequestBody CourseEnrollment courseEnrollment) {
         return courseEnrollmentService.create(courseEnrollment);
     }
+
+    @DeleteMapping("/{id}")
+    public CourseEnrollment delete(@PathVariable Long id) {return courseEnrollmentService.delete(id);}
+
 }
