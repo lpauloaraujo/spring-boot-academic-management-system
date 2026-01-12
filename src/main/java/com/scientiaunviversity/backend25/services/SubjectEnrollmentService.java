@@ -30,4 +30,10 @@ public class SubjectEnrollmentService {
     public SubjectEnrollment create(SubjectEnrollment subjectEnrollment) {
         return subjectEnrollmentRepository.save(subjectEnrollment);
     }
+
+    public SubjectEnrollment delete(Long studentId, Long classGroupId) {
+        SubjectEnrollment subjectEnrollmentToDelete = getById(studentId, classGroupId);
+        subjectEnrollmentRepository.delete(subjectEnrollmentToDelete);
+        return subjectEnrollmentToDelete;
+    }
 }

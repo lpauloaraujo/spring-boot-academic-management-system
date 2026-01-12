@@ -33,8 +33,8 @@ public class ClassGroup {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "period")//
-    private String period;
+    @Column(name = "semester")//
+    private String semester;
 
     @Column(name = "max_students")
     private Integer maxStudents;

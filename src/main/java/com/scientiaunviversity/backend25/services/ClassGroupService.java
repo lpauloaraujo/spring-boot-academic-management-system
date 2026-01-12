@@ -22,4 +22,10 @@ public class ClassGroupService {
             .orElseThrow(() -> new EntityNotFoundException("Class group not found."));}
 
     public ClassGroup create(ClassGroup classGroup) {return classGroupRepository.save(classGroup);}
+
+    public ClassGroup delete(Long id) {
+        ClassGroup classGroupToDelete = getById(id);
+        classGroupRepository.delete(classGroupToDelete);
+        return classGroupToDelete;
+    }
 }

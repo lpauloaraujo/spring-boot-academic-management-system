@@ -1,9 +1,12 @@
 package com.scientiaunviversity.backend25.controllers;
 
+import com.scientiaunviversity.backend25.DTOs.SubjectEnrollmentResponseDTO;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
+import com.scientiaunviversity.backend25.mappers.SubjectEnrollmentMapper;
 import com.scientiaunviversity.backend25.services.SubjectEnrollmentService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -11,21 +14,34 @@ import java.util.List;
 public class SubjectEnrollmentController {
 
     private final SubjectEnrollmentService subjectEnrollmentService;
+    private final SubjectEnrollmentMapper subjectEnrollmentMapper;
 
-    public SubjectEnrollmentController(SubjectEnrollmentService subjectEnrollmentService) {
+    public SubjectEnrollmentController(SubjectEnrollmentService subjectEnrollmentService, SubjectEnrollmentMapper subjectEnrollmentMapper) {
         this.subjectEnrollmentService = subjectEnrollmentService;
+        this.subjectEnrollmentMapper = subjectEnrollmentMapper;
     }
 
     @GetMapping
-    public List<SubjectEnrollment> getAll() {return subjectEnrollmentService.getAll();}
+    public List<SubjectEnrollmentResponseDTO> getAll() {
+        List<SubjectEnrollment> subjectEnrollmentList = subjectEnrollmentService.getAll();
+        List<SubjectEnrollmentResponseDTO> subjectEnrollmentResponseDTOList = new ArrayList<>();
+        for (SubjectEnrollment subjectEnrollment : subjectEnrollmentList) {
+            subjectEnrollmentResponseDTOList.add(subjectEnrollmentMapper.toResponse(subjectEnrollment));
+        } return subjectEnrollmentResponseDTOList;
+    }
 
     @GetMapping(params = {"studentId", "classGroupId"})
-    public SubjectEnrollment getById(@RequestParam Long studentId, @RequestParam Long classGroupId) {
-        return subjectEnrollmentService.getById(studentId, classGroupId);
+    public SubjectEnrollmentResponseDTO getById(@RequestParam Long studentId, @RequestParam Long classGroupId) {
+        return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.getById(studentId, classGroupId));
     }
 
     @PostMapping
-    public SubjectEnrollment create(@RequestBody SubjectEnrollment subjectEnrollment) {
-        return subjectEnrollmentService.create(subjectEnrollment);
+    public SubjectEnrollmentResponseDTO create(@RequestBody SubjectEnrollment subjectEnrollment) {
+        return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.create(subjectEnrollment));
+    }
+
+    @DeleteMapping(params = {"studentId", "classGroupId"})
+    public SubjectEnrollmentResponseDTO delete(@RequestParam Long studentId, @RequestParam Long classGroupId) {
+        return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.delete(studentId, classGroupId));
     }
 }
