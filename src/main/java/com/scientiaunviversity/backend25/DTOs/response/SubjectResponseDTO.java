@@ -1,4 +1,4 @@
-package com.scientiaunviversity.backend25.DTOs;
+package com.scientiaunviversity.backend25.DTOs.response;
 
 public record SubjectResponseDTO(
         Long id,

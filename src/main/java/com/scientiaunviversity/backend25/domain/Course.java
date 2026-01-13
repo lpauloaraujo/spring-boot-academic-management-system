@@ -20,5 +20,5 @@ public class Course {
     private String name;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Subject> subjects;
+    private Set<Subject> subjects = new java.util.HashSet<>();
 }

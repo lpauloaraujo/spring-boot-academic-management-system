@@ -1,6 +1,6 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.SubjectEnrollmentResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.response.SubjectEnrollmentResponseDTO;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
 import com.scientiaunviversity.backend25.mappers.SubjectEnrollmentMapper;
 import com.scientiaunviversity.backend25.services.SubjectEnrollmentService;

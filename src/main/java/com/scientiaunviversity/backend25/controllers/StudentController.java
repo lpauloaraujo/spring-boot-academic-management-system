@@ -1,9 +1,11 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.StudentResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.StudentRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.StudentResponseDTO;
 import com.scientiaunviversity.backend25.domain.Student;
 import com.scientiaunviversity.backend25.mappers.StudentMapper;
 import com.scientiaunviversity.backend25.services.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,13 +38,12 @@ public class StudentController {
     }
 
     @PostMapping
-    public StudentResponseDTO create(@RequestBody Student student) {
-        return studentMapper.toResponse(studentService.create(student));
+    public StudentResponseDTO create(@RequestBody @Valid StudentRequestDTO studentRequestDTO) {
+        return studentMapper.toResponse(studentService.create(studentRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     public StudentResponseDTO delete(@PathVariable Long id) {
         return studentMapper.toResponse(studentService.delete(id));
     }
-
 }

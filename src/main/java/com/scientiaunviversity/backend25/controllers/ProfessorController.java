@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.ProfessorResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.ProfessorRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.ProfessorResponseDTO;
 import com.scientiaunviversity.backend25.domain.Professor;
 import com.scientiaunviversity.backend25.mappers.ProfessorMapper;
 import com.scientiaunviversity.backend25.services.ProfessorService;
@@ -36,8 +37,8 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public ProfessorResponseDTO create(@RequestBody Professor professor) {
-        return professorMapper.toResponse(professorService.create(professor));
+    public ProfessorResponseDTO create(@RequestBody ProfessorRequestDTO professorRequestDTO) {
+        return professorMapper.toResponse(professorService.create(professorRequestDTO));
     }
 
     @DeleteMapping("/{id}")

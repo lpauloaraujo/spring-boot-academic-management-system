@@ -1,6 +1,6 @@
 package com.scientiaunviversity.backend25.mappers;
 
-import com.scientiaunviversity.backend25.DTOs.SubjectResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.response.SubjectResponseDTO;
 import com.scientiaunviversity.backend25.domain.Subject;
 import org.springframework.stereotype.Component;
 

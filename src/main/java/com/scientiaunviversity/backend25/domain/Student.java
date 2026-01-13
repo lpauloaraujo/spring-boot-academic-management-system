@@ -21,4 +21,10 @@ public class Student extends User {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SubjectEnrollment> subjectEnrollments = new HashSet<>();
+
+    public void addCourseEnrollment(CourseEnrollment courseEnrollment) {
+        this.courseEnrollment = courseEnrollment;
+        courseEnrollment.setStudent(this);
+    }
+
 }

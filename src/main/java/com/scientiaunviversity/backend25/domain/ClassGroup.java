@@ -22,18 +22,10 @@ public class ClassGroup {
     @OneToOne
     private Subject subject;
 
-    @ManyToOne
-    @JoinColumn(name = "courseId")
-    private Course course;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Professor professor;
-
     @Column(name = "code")
     private String code;
 
-    @Column(name = "semester")//
+    @Column(name = "semester")
     private String semester;
 
     @Column(name = "max_students")
@@ -50,4 +42,15 @@ public class ClassGroup {
 
     @Column(name = "update_date")
     private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

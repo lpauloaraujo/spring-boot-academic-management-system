@@ -1,6 +1,6 @@
 package com.scientiaunviversity.backend25.mappers;
 
-import com.scientiaunviversity.backend25.DTOs.SubjectEnrollmentResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.response.SubjectEnrollmentResponseDTO;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
 import org.springframework.stereotype.Component;
 

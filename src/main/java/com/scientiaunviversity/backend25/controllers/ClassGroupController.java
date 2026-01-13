@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.ClassGroupResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.ClassGroupRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.ClassGroupResponseDTO;
 import com.scientiaunviversity.backend25.domain.ClassGroup;
 import com.scientiaunviversity.backend25.mappers.ClassGroupMapper;
 import com.scientiaunviversity.backend25.services.ClassGroupService;
@@ -36,8 +37,8 @@ public class ClassGroupController {
     }
 
     @PostMapping
-    public ClassGroupResponseDTO create(@RequestBody ClassGroup classGroup) {
-        return  classGroupMapper.toResponse(classGroupService.create(classGroup));
+    public ClassGroupResponseDTO create(@RequestBody ClassGroupRequestDTO classGroupRequestDTO) {
+        return  classGroupMapper.toResponse(classGroupService.create(classGroupRequestDTO));
     }
 
     @DeleteMapping("/{id}")

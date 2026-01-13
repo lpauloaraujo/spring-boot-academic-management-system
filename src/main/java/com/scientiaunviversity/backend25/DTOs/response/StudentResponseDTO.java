@@ -1,4 +1,4 @@
-package com.scientiaunviversity.backend25.DTOs;
+package com.scientiaunviversity.backend25.DTOs.response;
 
 import java.util.List;
 

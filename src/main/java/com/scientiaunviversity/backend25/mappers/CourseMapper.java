@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.mappers;
 
-import com.scientiaunviversity.backend25.DTOs.CourseResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.CourseRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.CourseResponseDTO;
 import com.scientiaunviversity.backend25.domain.Course;
 import com.scientiaunviversity.backend25.domain.Subject;
 import org.antlr.v4.runtime.misc.Array2DHashSet;
@@ -10,6 +11,12 @@ import java.util.Set;
 
 @Component
 public class CourseMapper {
+
+    public Course toEntity(CourseRequestDTO courseRequestDTO) {
+        Course course = new Course();
+        course.setName(courseRequestDTO.getName());
+        return course;
+    }
 
     public CourseResponseDTO toResponse(Course course) {
 

@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.CourseResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.CourseRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.CourseResponseDTO;
 import com.scientiaunviversity.backend25.domain.Course;
 import com.scientiaunviversity.backend25.mappers.CourseMapper;
 import com.scientiaunviversity.backend25.services.CourseService;
@@ -36,8 +37,8 @@ public class CourseController {
     }
 
     @PostMapping
-    public CourseResponseDTO create(@RequestBody Course course) {
-        return courseMapper.toResponse(courseService.create(course));
+    public CourseResponseDTO create(@RequestBody CourseRequestDTO courseRequestDTO) {
+        return courseMapper.toResponse(courseService.create(courseRequestDTO));
     }
 
     @DeleteMapping("/{id}")

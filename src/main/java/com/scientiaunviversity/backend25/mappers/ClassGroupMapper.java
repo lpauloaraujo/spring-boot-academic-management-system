@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.mappers;
 
-import com.scientiaunviversity.backend25.DTOs.ClassGroupResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.ClassGroupRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.ClassGroupResponseDTO;
 import com.scientiaunviversity.backend25.domain.ClassGroup;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
 import org.springframework.stereotype.Component;
@@ -22,8 +23,8 @@ public class ClassGroupMapper {
         return new ClassGroupResponseDTO(
                 classGroup.getClassGroupId(),
                 classGroup.getSubject().getName(),
-                classGroup.getCourse().getName(),
-                classGroup.getProfessor().getFullName(),
+                classGroup.getSubject().getCourse().getName(),
+                classGroup.getSubject().getProfessor().getFullName(),
                 classGroup.getCode(),
                 classGroup.getSemester(),
                 classGroup.getMaxStudents(),

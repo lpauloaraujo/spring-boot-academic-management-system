@@ -1,6 +1,7 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.SubjectResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.SubjectRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.SubjectResponseDTO;
 import com.scientiaunviversity.backend25.domain.Subject;
 import com.scientiaunviversity.backend25.mappers.SubjectMapper;
 import com.scientiaunviversity.backend25.services.SubjectService;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/subjects")
@@ -37,8 +37,8 @@ public class SubjectController {
     }
 
     @PostMapping
-    public SubjectResponseDTO create(@RequestBody Subject subject) {
-        return subjectMapper.toResponse(subjectService.create(subject));
+    public SubjectResponseDTO create(@RequestBody SubjectRequestDTO subjectRequestDTO) {
+        return subjectMapper.toResponse(subjectService.create(subjectRequestDTO));
     }
 
     @DeleteMapping("/{id}")

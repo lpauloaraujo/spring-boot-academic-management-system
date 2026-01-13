@@ -1,9 +1,11 @@
 package com.scientiaunviversity.backend25.controllers;
 
-import com.scientiaunviversity.backend25.DTOs.CourseEnrollmentResponseDTO;
+import com.scientiaunviversity.backend25.DTOs.request.CourseEnrollmentRequestDTO;
+import com.scientiaunviversity.backend25.DTOs.response.CourseEnrollmentResponseDTO;
 import com.scientiaunviversity.backend25.domain.CourseEnrollment;
 import com.scientiaunviversity.backend25.mappers.CourseEnrollmentMapper;
 import com.scientiaunviversity.backend25.services.CourseEnrollmentService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -38,9 +40,8 @@ public class CourseEnrollmentController {
     }
 
     @PostMapping
-    public CourseEnrollmentResponseDTO create(@RequestBody CourseEnrollment courseEnrollment) {
-        return courseEnrollmentMapper.toResponse(courseEnrollmentService.create(courseEnrollment));
-    }
+    public CourseEnrollmentResponseDTO create(@RequestBody @Valid CourseEnrollmentRequestDTO courseEnrollmentRequestDTO)
+    {return courseEnrollmentMapper.toResponse(courseEnrollmentService.create(courseEnrollmentRequestDTO));}
 
     @DeleteMapping("/{id}")
     public CourseEnrollmentResponseDTO delete(@PathVariable Long id) {

@@ -1,6 +1,8 @@
 package com.scientiaunviversity.backend25.services;
 
+import com.scientiaunviversity.backend25.DTOs.request.ProfessorRequestDTO;
 import com.scientiaunviversity.backend25.domain.Professor;
+import com.scientiaunviversity.backend25.mappers.ProfessorMapper;
 import com.scientiaunviversity.backend25.repositories.ProfessorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -12,9 +14,11 @@ import java.util.List;
 public class ProfessorService {
 
     private final ProfessorRepository professorRepository;
+    private final ProfessorMapper professorMapper;
 
-    public ProfessorService(ProfessorRepository professorRepository) {
+    public ProfessorService(ProfessorRepository professorRepository, ProfessorMapper professorMapper) {
         this.professorRepository = professorRepository;
+        this.professorMapper = professorMapper;
     }
 
     public List<Professor> getAll() {
@@ -26,8 +30,8 @@ public class ProfessorService {
                 .orElseThrow(() -> new EntityNotFoundException("Professor not found."));
     }
 
-    public Professor create(Professor professor) {
-        return professorRepository.save(professor);
+    public Professor create(ProfessorRequestDTO professorRequestDTO) {
+        return professorRepository.save(professorMapper.toEntity(professorRequestDTO));
     }
 
     @Transactional
