@@ -43,4 +43,14 @@ public class StudentService {
         studentRepository.delete(studentToDelete);
         return studentToDelete;
     }
+
+    @Transactional
+    public Student update(Long id, StudentRequestDTO studentRequestDTO) {
+        Student studentToUpdate = getById(id);
+        studentToUpdate.setFullName(studentRequestDTO.getFullName());
+        studentToUpdate.setEmail(studentRequestDTO.getEmail());
+        studentToUpdate.setPassword(studentRequestDTO.getPassword());
+        studentToUpdate.setCpf(studentRequestDTO.getCpf());
+        return studentToUpdate;
+    }
 }

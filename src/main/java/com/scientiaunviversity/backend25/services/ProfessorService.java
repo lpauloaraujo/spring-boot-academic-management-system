@@ -40,4 +40,17 @@ public class ProfessorService {
         professorRepository.delete(professorToDelete);
         return professorToDelete;
     }
+
+    @Transactional
+    public Professor update(Long id, ProfessorRequestDTO professorRequestDTO) {
+        Professor professorToUpdate = getById(id);
+        professorToUpdate.setFullName(professorRequestDTO.getFullName());
+        professorToUpdate.setEmail(professorToUpdate.getEmail());
+        professorToUpdate.setPassword(professorRequestDTO.getPassword());
+        professorToUpdate.setCpf(professorRequestDTO.getCpf());
+        professorToUpdate.setRegistrationNumber(professorRequestDTO.getRegistrationNumber());
+        professorToUpdate.setAcademicDegree(professorRequestDTO.getAcademicDegree());
+        professorToUpdate.setDepartment(professorRequestDTO.getDepartment());
+        return professorToUpdate;
+    }
 }

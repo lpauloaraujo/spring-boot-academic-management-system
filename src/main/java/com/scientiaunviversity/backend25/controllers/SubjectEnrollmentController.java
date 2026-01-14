@@ -1,9 +1,11 @@
 package com.scientiaunviversity.backend25.controllers;
 
+import com.scientiaunviversity.backend25.DTOs.request.SubjectEnrollmentRequestDTO;
 import com.scientiaunviversity.backend25.DTOs.response.SubjectEnrollmentResponseDTO;
 import com.scientiaunviversity.backend25.domain.SubjectEnrollment;
 import com.scientiaunviversity.backend25.mappers.SubjectEnrollmentMapper;
 import com.scientiaunviversity.backend25.services.SubjectEnrollmentService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,7 +29,8 @@ public class SubjectEnrollmentController {
         List<SubjectEnrollmentResponseDTO> subjectEnrollmentResponseDTOList = new ArrayList<>();
         for (SubjectEnrollment subjectEnrollment : subjectEnrollmentList) {
             subjectEnrollmentResponseDTOList.add(subjectEnrollmentMapper.toResponse(subjectEnrollment));
-        } return subjectEnrollmentResponseDTOList;
+        }
+        return subjectEnrollmentResponseDTOList;
     }
 
     @GetMapping(params = {"studentId", "classGroupId"})
@@ -36,12 +39,24 @@ public class SubjectEnrollmentController {
     }
 
     @PostMapping
-    public SubjectEnrollmentResponseDTO create(@RequestBody SubjectEnrollment subjectEnrollment) {
-        return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.create(subjectEnrollment));
+    public SubjectEnrollmentResponseDTO create(@RequestBody SubjectEnrollmentRequestDTO subjectEnrollmentRequestDTO) {
+        return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.create(subjectEnrollmentRequestDTO));
     }
 
     @DeleteMapping(params = {"studentId", "classGroupId"})
     public SubjectEnrollmentResponseDTO delete(@RequestParam Long studentId, @RequestParam Long classGroupId) {
         return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.delete(studentId, classGroupId));
+    }
+
+    @PutMapping(params = {"studentId", "classGroupId"})
+    public SubjectEnrollmentResponseDTO update(
+            @RequestParam Long studentId,
+            @RequestParam Long classGroupId,
+            @RequestBody @Valid SubjectEnrollmentRequestDTO subjectEnrollmentRequestDTO
+    ) {
+        return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.update(studentId,
+                classGroupId,
+                subjectEnrollmentRequestDTO)
+        );
     }
 }

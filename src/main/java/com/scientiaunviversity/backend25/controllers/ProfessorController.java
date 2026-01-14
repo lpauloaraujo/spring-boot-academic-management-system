@@ -5,6 +5,7 @@ import com.scientiaunviversity.backend25.DTOs.response.ProfessorResponseDTO;
 import com.scientiaunviversity.backend25.domain.Professor;
 import com.scientiaunviversity.backend25.mappers.ProfessorMapper;
 import com.scientiaunviversity.backend25.services.ProfessorService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -37,13 +38,18 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public ProfessorResponseDTO create(@RequestBody ProfessorRequestDTO professorRequestDTO) {
+    public ProfessorResponseDTO create(@RequestBody @Valid ProfessorRequestDTO professorRequestDTO) {
         return professorMapper.toResponse(professorService.create(professorRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     public ProfessorResponseDTO delete(@PathVariable Long id) {
         return professorMapper.toResponse(professorService.delete(id));
+    }
+
+    @PutMapping(params = {"professorId"})
+    public ProfessorResponseDTO update(@RequestParam Long professorId, @RequestBody @Valid ProfessorRequestDTO professorRequestDTO) {
+        return professorMapper.toResponse(professorService.update(professorId, professorRequestDTO));
     }
 
 }

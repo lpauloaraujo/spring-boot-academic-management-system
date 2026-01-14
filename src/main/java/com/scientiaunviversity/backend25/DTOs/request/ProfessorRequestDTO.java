@@ -4,6 +4,7 @@ import com.scientiaunviversity.backend25.domain.enums.AcademicDegree;
 import com.scientiaunviversity.backend25.domain.enums.Department;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,9 +28,9 @@ public class ProfessorRequestDTO {
     @NotBlank
     private String registrationNumber;
 
-    @NotBlank
+    @NotNull
     private AcademicDegree academicDegree;
 
-    @NotBlank
+    @NotNull
     private Department department;
 }

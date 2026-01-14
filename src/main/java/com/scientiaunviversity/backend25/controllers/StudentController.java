@@ -46,4 +46,9 @@ public class StudentController {
     public StudentResponseDTO delete(@PathVariable Long id) {
         return studentMapper.toResponse(studentService.delete(id));
     }
+
+    @PutMapping(params = {"studentId"})
+    public StudentResponseDTO update(@RequestParam Long studentId, @RequestBody @Valid StudentRequestDTO studentRequestDTO) {
+        return studentMapper.toResponse(studentService.update(studentId, studentRequestDTO));
+    }
 }
