@@ -48,4 +48,16 @@ public class ClassGroupService {
         classGroupRepository.delete(classGroupToDelete);
         return classGroupToDelete;
     }
+
+    @Transactional
+    public ClassGroup update(Long id, ClassGroupRequestDTO classGroupRequestDTO) {
+        ClassGroup classGroupToUpdate = getById(id);
+        Subject subject = subjectService.getById(classGroupRequestDTO.getSubjectId());
+        classGroupToUpdate.setSubject(subject);
+        classGroupToUpdate.setCode(classGroupRequestDTO.getCode());
+        classGroupToUpdate.setSemester(classGroupRequestDTO.getSemester());
+        classGroupToUpdate.setMaxStudents(classGroupRequestDTO.getMaxStudents());
+        classGroupToUpdate.setStatus(classGroupRequestDTO.getStatus());
+        return classGroupToUpdate;
+    }
 }

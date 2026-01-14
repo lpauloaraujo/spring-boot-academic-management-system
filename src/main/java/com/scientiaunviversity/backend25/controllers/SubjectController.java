@@ -5,6 +5,7 @@ import com.scientiaunviversity.backend25.DTOs.response.SubjectResponseDTO;
 import com.scientiaunviversity.backend25.domain.Subject;
 import com.scientiaunviversity.backend25.mappers.SubjectMapper;
 import com.scientiaunviversity.backend25.services.SubjectService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class SubjectController {
         } return subjectResponseDTOSList;
     }
 
-    @GetMapping("/{id}")
-    public SubjectResponseDTO getById(@PathVariable Long id) {
-        return subjectMapper.toResponse(subjectService.getById(id));
+    @GetMapping("/{subjectId}")
+    public SubjectResponseDTO getById(@PathVariable Long subjectId) {
+        return subjectMapper.toResponse(subjectService.getById(subjectId));
     }
 
     @PostMapping
@@ -41,8 +42,13 @@ public class SubjectController {
         return subjectMapper.toResponse(subjectService.create(subjectRequestDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public SubjectResponseDTO delete(@PathVariable Long id) {
-        return subjectMapper.toResponse(subjectService.delete(id));
+    @DeleteMapping("/{subjectId}")
+    public SubjectResponseDTO delete(@PathVariable Long subjectId) {
+        return subjectMapper.toResponse(subjectService.delete(subjectId));
+    }
+
+    @PutMapping("/{subjectId}")
+    public SubjectResponseDTO update(@PathVariable Long subjectId, @RequestBody @Valid SubjectRequestDTO subjectRequestDTO) {
+        return subjectMapper.toResponse(subjectService.update(subjectId, subjectRequestDTO));
     }
 }

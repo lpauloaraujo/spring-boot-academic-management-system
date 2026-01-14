@@ -34,18 +34,27 @@ public class CourseEnrollmentController {
          } return courseEnrollmentResponseDTOList;
     }
 
-    @GetMapping("/{id}")
-    public CourseEnrollmentResponseDTO getById(@PathVariable Long id) {
-        return courseEnrollmentMapper.toResponse(courseEnrollmentService.getById(id));
+    @GetMapping("/{courseEnrollmentId}")
+    public CourseEnrollmentResponseDTO getById(@PathVariable Long courseEnrollmentId) {
+        return courseEnrollmentMapper.toResponse(courseEnrollmentService.getById(courseEnrollmentId));
     }
 
     @PostMapping
     public CourseEnrollmentResponseDTO create(@RequestBody @Valid CourseEnrollmentRequestDTO courseEnrollmentRequestDTO)
     {return courseEnrollmentMapper.toResponse(courseEnrollmentService.create(courseEnrollmentRequestDTO));}
 
-    @DeleteMapping("/{id}")
-    public CourseEnrollmentResponseDTO delete(@PathVariable Long id) {
-        return courseEnrollmentMapper.toResponse(courseEnrollmentService.delete(id));
+    @DeleteMapping("/{courseEnrollmentId}")
+    public CourseEnrollmentResponseDTO delete(@PathVariable Long courseEnrollmentId) {
+        return courseEnrollmentMapper.toResponse(courseEnrollmentService.delete(courseEnrollmentId));
+    }
+
+    @PutMapping("/{courseEnrollmentId}")
+    public CourseEnrollmentResponseDTO update(
+            @PathVariable Long courseEnrollmentId,
+            @RequestBody @Valid CourseEnrollmentRequestDTO courseEnrollmentRequestDTO) {
+        return courseEnrollmentMapper.toResponse(
+                courseEnrollmentService.update(courseEnrollmentId, courseEnrollmentRequestDTO)
+        );
     }
 
 }

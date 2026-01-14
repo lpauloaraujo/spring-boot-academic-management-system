@@ -32,9 +32,9 @@ public class StudentController {
         } return studentResponseDTOSList;
     }
 
-    @GetMapping("/{id}")
-    public StudentResponseDTO getById(@PathVariable Long id) {
-        return studentMapper.toResponse(studentService.getById(id));
+    @GetMapping("/{studentId}")
+    public StudentResponseDTO getById(@PathVariable Long studentId) {
+        return studentMapper.toResponse(studentService.getById(studentId));
     }
 
     @PostMapping
@@ -42,13 +42,13 @@ public class StudentController {
         return studentMapper.toResponse(studentService.create(studentRequestDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public StudentResponseDTO delete(@PathVariable Long id) {
-        return studentMapper.toResponse(studentService.delete(id));
+    @DeleteMapping("/{studentId}")
+    public StudentResponseDTO delete(@PathVariable Long studentId) {
+        return studentMapper.toResponse(studentService.delete(studentId));
     }
 
-    @PutMapping(params = {"studentId"})
-    public StudentResponseDTO update(@RequestParam Long studentId, @RequestBody @Valid StudentRequestDTO studentRequestDTO) {
+    @PutMapping("/{studentId}")
+    public StudentResponseDTO update(@PathVariable Long studentId, @RequestBody @Valid StudentRequestDTO studentRequestDTO) {
         return studentMapper.toResponse(studentService.update(studentId, studentRequestDTO));
     }
 }

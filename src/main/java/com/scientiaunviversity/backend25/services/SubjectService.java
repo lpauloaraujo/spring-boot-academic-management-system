@@ -45,4 +45,15 @@ public class SubjectService {
         subjectRepository.delete(subjectToDelete);
         return subjectToDelete;
     }
+
+    @Transactional
+    public Subject update(Long id, SubjectRequestDTO subjectRequestDTO) {
+        Subject subjectToUpdate = getById(id);
+        Course course = courseService.getById(subjectRequestDTO.getCourseId());
+        Professor professor = professorService.getById(subjectRequestDTO.getProfessorId());
+        subjectToUpdate.setName(subjectRequestDTO.getName());
+        subjectToUpdate.setCourse(course);
+        subjectToUpdate.setProfessor(professor);
+        return subjectToUpdate;
+    }
 }

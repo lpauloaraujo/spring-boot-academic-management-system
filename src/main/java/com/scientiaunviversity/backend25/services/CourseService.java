@@ -36,4 +36,11 @@ public class CourseService {
         courseRepository.delete(courseToDelete);
         return courseToDelete;
     }
+
+    @Transactional
+    public Course update(Long id, CourseRequestDTO courseRequestDTO) {
+        Course courseToUpdate = getById(id);
+        courseToUpdate.setName(courseToUpdate.getName());
+        return courseToUpdate;
+    }
 }

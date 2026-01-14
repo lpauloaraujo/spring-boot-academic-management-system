@@ -5,6 +5,7 @@ import com.scientiaunviversity.backend25.DTOs.response.CourseResponseDTO;
 import com.scientiaunviversity.backend25.domain.Course;
 import com.scientiaunviversity.backend25.mappers.CourseMapper;
 import com.scientiaunviversity.backend25.services.CourseService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class CourseController {
         } return courseResponseDTOList;
     }
 
-    @GetMapping("/{id}")
-    public CourseResponseDTO getById (@PathVariable Long id) {
-        return courseMapper.toResponse(courseService.getById(id));
+    @GetMapping("/{courseId}")
+    public CourseResponseDTO getById (@PathVariable Long courseId) {
+        return courseMapper.toResponse(courseService.getById(courseId));
     }
 
     @PostMapping
@@ -41,7 +42,12 @@ public class CourseController {
         return courseMapper.toResponse(courseService.create(courseRequestDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public CourseResponseDTO delete(@PathVariable Long id) {return courseMapper.toResponse(courseService.delete(id));}
+    @DeleteMapping("/{courseId}")
+    public CourseResponseDTO delete(@PathVariable Long courseId) {return courseMapper.toResponse(courseService.delete(courseId));}
+
+    @PutMapping("/{courseId}")
+    public CourseResponseDTO update(@PathVariable Long courseId, @RequestBody @Valid CourseRequestDTO courseRequestDTO) {
+        return courseMapper.toResponse(courseService.update(courseId, courseRequestDTO));
+    }
 
 }

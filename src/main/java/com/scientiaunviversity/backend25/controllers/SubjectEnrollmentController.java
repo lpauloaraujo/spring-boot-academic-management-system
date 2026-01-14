@@ -33,8 +33,8 @@ public class SubjectEnrollmentController {
         return subjectEnrollmentResponseDTOList;
     }
 
-    @GetMapping(params = {"studentId", "classGroupId"})
-    public SubjectEnrollmentResponseDTO getById(@RequestParam Long studentId, @RequestParam Long classGroupId) {
+    @GetMapping("/student/{studentId}/class_group/{classGroupId}")
+    public SubjectEnrollmentResponseDTO getById(@PathVariable Long studentId, @PathVariable Long classGroupId) {
         return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.getById(studentId, classGroupId));
     }
 
@@ -43,15 +43,15 @@ public class SubjectEnrollmentController {
         return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.create(subjectEnrollmentRequestDTO));
     }
 
-    @DeleteMapping(params = {"studentId", "classGroupId"})
-    public SubjectEnrollmentResponseDTO delete(@RequestParam Long studentId, @RequestParam Long classGroupId) {
+    @DeleteMapping("/student/{studentId}/class_group/{classGroupId}")
+    public SubjectEnrollmentResponseDTO delete(@PathVariable Long studentId, @PathVariable Long classGroupId) {
         return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.delete(studentId, classGroupId));
     }
 
-    @PutMapping(params = {"studentId", "classGroupId"})
+    @PutMapping("/student/{studentId}/class_group/{classGroupId}")
     public SubjectEnrollmentResponseDTO update(
-            @RequestParam Long studentId,
-            @RequestParam Long classGroupId,
+            @PathVariable Long studentId,
+            @PathVariable Long classGroupId,
             @RequestBody @Valid SubjectEnrollmentRequestDTO subjectEnrollmentRequestDTO
     ) {
         return subjectEnrollmentMapper.toResponse(subjectEnrollmentService.update(studentId,

@@ -31,9 +31,9 @@ public class ClassGroupController {
         } return classGroupResponseDTOList;
     }
 
-    @GetMapping("/{id}")
-    public ClassGroupResponseDTO getById(@PathVariable Long id) {
-        return classGroupMapper.toResponse(classGroupService.getById(id));
+    @GetMapping("/{classGroupId}")
+    public ClassGroupResponseDTO getById(@PathVariable Long classGroupId) {
+        return classGroupMapper.toResponse(classGroupService.getById(classGroupId));
     }
 
     @PostMapping
@@ -41,9 +41,14 @@ public class ClassGroupController {
         return  classGroupMapper.toResponse(classGroupService.create(classGroupRequestDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public ClassGroupResponseDTO delete(@PathVariable Long id) {
-        return classGroupMapper.toResponse(classGroupService.delete(id));
+    @DeleteMapping("/{classGroupId}")
+    public ClassGroupResponseDTO delete(@PathVariable Long classGroupId) {
+        return classGroupMapper.toResponse(classGroupService.delete(classGroupId));
+    }
+
+    @PutMapping("/{classGroupId}")
+    public ClassGroupResponseDTO update(@PathVariable Long classGroupId, @RequestBody ClassGroupRequestDTO classGroupRequestDTO) {
+        return classGroupMapper.toResponse(classGroupService.update(classGroupId, classGroupRequestDTO));
     }
 
 }

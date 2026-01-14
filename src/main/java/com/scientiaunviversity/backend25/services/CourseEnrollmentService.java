@@ -58,4 +58,23 @@ public class CourseEnrollmentService {
         courseEnrollmentRepository.delete(courseEnrollmentToDelete);
         return courseEnrollmentToDelete;
     }
+
+    @Transactional
+    public CourseEnrollment update(Long id, CourseEnrollmentRequestDTO courseEnrollmentRequestDTO) {
+        CourseEnrollment courseEnrollmentToUpdate = getById(id);
+        Student student = studentService.getById(courseEnrollmentRequestDTO.getStudentId());
+        Course course = courseService.getById(courseEnrollmentRequestDTO.getCourseId());
+
+        courseEnrollmentToUpdate.setEnrollmentCode(courseEnrollmentToUpdate.getEnrollmentCode());
+        courseEnrollmentToUpdate.setStudent(student);
+        courseEnrollmentToUpdate.setCourse(course);
+        courseEnrollmentToUpdate.setStatus(courseEnrollmentRequestDTO.getCourseEnrollmentStatus());
+
+        if (courseEnrollmentRequestDTO.getAdmissionDate() != null) {
+            courseEnrollmentToUpdate.setAdmissionDate(courseEnrollmentRequestDTO.getAdmissionDate());
+        }
+
+        return courseEnrollmentToUpdate;
+
+    }
 }

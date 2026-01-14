@@ -32,9 +32,9 @@ public class ProfessorController {
         } return professorResponseDTOList;
     }
 
-    @GetMapping("/{id}")
-    public ProfessorResponseDTO getById(@PathVariable Long id) {
-        return professorMapper.toResponse(professorService.getById(id));
+    @GetMapping("/{professorId}")
+    public ProfessorResponseDTO getById(@PathVariable Long professorId) {
+        return professorMapper.toResponse(professorService.getById(professorId));
     }
 
     @PostMapping
@@ -42,13 +42,13 @@ public class ProfessorController {
         return professorMapper.toResponse(professorService.create(professorRequestDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public ProfessorResponseDTO delete(@PathVariable Long id) {
-        return professorMapper.toResponse(professorService.delete(id));
+    @DeleteMapping("/{professorId}")
+    public ProfessorResponseDTO delete(@PathVariable Long professorId) {
+        return professorMapper.toResponse(professorService.delete(professorId));
     }
 
-    @PutMapping(params = {"professorId"})
-    public ProfessorResponseDTO update(@RequestParam Long professorId, @RequestBody @Valid ProfessorRequestDTO professorRequestDTO) {
+    @PutMapping("/{professorId}")
+    public ProfessorResponseDTO update(@PathVariable Long professorId, @RequestBody @Valid ProfessorRequestDTO professorRequestDTO) {
         return professorMapper.toResponse(professorService.update(professorId, professorRequestDTO));
     }
 
